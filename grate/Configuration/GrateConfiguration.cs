@@ -125,4 +125,7 @@ public record GrateConfiguration
     /// If specified, location of the backup file to use when restoring
     /// </summary>
     public string? Restore { get; init; }
+
+    public string? AlterDatabaseFolderName { get; init; }
+    public string? UpFolderName { get; init; }
 }

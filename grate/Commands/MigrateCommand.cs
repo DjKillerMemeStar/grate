@@ -16,6 +16,8 @@ public sealed class MigrateCommand : RootCommand
         Add(Database());
         Add(ConnectionString());
         Add(SqlFilesDirectory());
+        Add(AlterDatabaseFolderName());
+        Add(UpFolderName());
         Add(OutputPath());
         Add(ServerName());
         Add(AdminConnectionString());
@@ -72,13 +74,26 @@ public sealed class MigrateCommand : RootCommand
             "The directory where your SQL scripts are"
         ).ExistingOnly();
 
-    private static Option OutputPath() =>
-        new Option<DirectoryInfo>(
-            new[] { "--output", "-o", "--outputPath" },
-            () => new DirectoryInfo(DefaultOutputPath),
-            "This is where everything related to the migration is stored. This includes any backups, all items that ran, permission dumps, logs, etc."
-        ).ExistingOnly();
+    private static Option AlterDatabaseFolderName() =>
+        new Option<string>(
+            new[] { "--alterdatabasefoldername", "--ad", "--alterdatabasefolder", "--alterdatabase" },
+            () => "alterDatabase",
+            "The name of the folder where you keep your alter database scripts."
+        );
+    
+    private static Option UpFolderName() =>
+        new Option<string>(
+            new[] { "--upfoldername", "--up", "-u", "--upfolder" },
+            () => "up",
+            "The name of the folder where you keep your update scripts."
+        );
 
+    private static Option OutputPath() =>
+    new Option<DirectoryInfo>(
+        new[] { "--output", "-o", "--outputPath" },
+        () => new DirectoryInfo(DefaultOutputPath),
+        "This is where everything related to the migration is stored. This includes any backups, all items that ran, permission dumps, logs, etc."
+    ).ExistingOnly();
 
     //SECURITY OPTIONS
     private static Option AccessToken() =>

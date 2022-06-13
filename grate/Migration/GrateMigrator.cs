@@ -33,6 +33,7 @@ public class GrateMigrator : IAsyncDisposable
         var config = dbMigrator.Configuration;
         KnownFolders knownFolders = config.KnownFolders ?? throw new ArgumentException(nameof(config.KnownFolders));
 
+        //TODO add support for custom folders
 
         _logger.LogInformation("Running grate v{Version} against {ServerName} - {DatabaseName}.",
             ApplicationInfo.Version,

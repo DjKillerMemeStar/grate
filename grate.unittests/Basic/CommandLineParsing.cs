@@ -180,6 +180,32 @@ public class CommandLineParsing
 
         cfg?.SchemaName.Should().Be(expected);
     }
+    
+    [TestCase("", "alterDatabase")]
+    [TestCase("--ad AlterDatabase1", "AlterDatabase1")]
+    [TestCase("--alterdatabase AlterDatabase2", "AlterDatabase2")]
+    [TestCase("--alterdatabasefolder AlterDatabase3", "AlterDatabase3")]
+    [TestCase("--alterdatabasefoldername AlterDatabase4", "AlterDatabase4")]
+    public async Task AlterDatabaseFolderName(string argName, string expected)
+    {
+        var commandline = argName;
+        var cfg = await ParseGrateConfiguration(commandline);
+
+        cfg?.AlterDatabaseFolderName.Should().Be(expected);
+    }
+    
+    [TestCase("", "up")]
+    [TestCase("-u Up1", "Up1")]
+    [TestCase("--up Up2", "Up2")]
+    [TestCase("--upfoldername Up3", "Up3")]
+    [TestCase("--upfolder Up4", "Up4")]
+    public async Task UpFolderName(string argName, string expected)
+    {
+        var commandline = argName;
+        var cfg = await ParseGrateConfiguration(commandline);
+
+        cfg?.UpFolderName.Should().Be(expected);
+    }
 
     [TestCase("", false)]
     [TestCase("--silent true", true)]
