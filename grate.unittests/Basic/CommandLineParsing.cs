@@ -207,6 +207,32 @@ public class CommandLineParsing
         cfg?.UpFolderName.Should().Be(expected);
     }
 
+    [TestCase("", "sprocs")]
+    [TestCase("--sp sprocs1", "sprocs1")]
+    [TestCase("--sprocs sprocs2", "sprocs2")]
+    [TestCase("--sprocsfoldername sprocs3", "sprocs3")]
+    [TestCase("--sprocsfolder sprocs4", "sprocs4")]
+    public async Task SProcsFolderName(string argName, string expected)
+    {
+        var commandline = argName;
+        var cfg = await ParseGrateConfiguration(commandline);
+
+        cfg?.SProcsFolderName.Should().Be(expected);
+    }
+
+    [TestCase("", "permissions")]
+    [TestCase("-p permissions1", "permissions1")]
+    [TestCase("--permissions permissions2", "permissions2")]
+    [TestCase("--permissionsfoldername permissions3", "permissions3")]
+    [TestCase("--permissionsfolder permissions4", "permissions4")]
+    public async Task PermissionsFolderName(string argName, string expected)
+    {
+        var commandline = argName;
+        var cfg = await ParseGrateConfiguration(commandline);
+
+        cfg?.PermissionsFolderName.Should().Be(expected);
+    }
+
     [TestCase("", false)]
     [TestCase("--silent true", true)]
     [TestCase("--silent", true)]

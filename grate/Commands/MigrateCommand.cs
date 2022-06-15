@@ -18,6 +18,8 @@ public sealed class MigrateCommand : RootCommand
         Add(SqlFilesDirectory());
         Add(AlterDatabaseFolderName());
         Add(UpFolderName());
+        Add(PermissionsFolderName());
+        Add(SProcsFolderName());
         Add(OutputPath());
         Add(ServerName());
         Add(AdminConnectionString());
@@ -86,6 +88,20 @@ public sealed class MigrateCommand : RootCommand
             new[] { "--upfoldername", "--up", "-u", "--upfolder" },
             () => "up",
             "The name of the folder where you keep your update scripts."
+        );
+    
+    private static Option SProcsFolderName() =>
+        new Option<string>(
+            new[] { "--sprocsfoldername", "--sprocs", "--sp", "--sprocsfolder" },
+            () => "sprocs",
+            "The name of the folder where you keep your stored procedures."
+        );
+    
+    private static Option PermissionsFolderName() =>
+        new Option<string>(
+            new[] { "--permissionsfoldername", "--permissions", "-p", "--permissionsfolder" },
+            () => "permissions",
+            "The name of the folder where you keep your permission scripts."
         );
 
     private static Option OutputPath() =>

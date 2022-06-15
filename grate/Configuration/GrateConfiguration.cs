@@ -128,4 +128,6 @@ public record GrateConfiguration
 
     public string? AlterDatabaseFolderName { get; init; }
     public string? UpFolderName { get; init; }
+    public string? SProcsFolderName { get; init; }
+    public string? PermissionsFolderName { get; init; }
 }
